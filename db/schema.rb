@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203194749) do
+ActiveRecord::Schema.define(version: 20170203202421) do
 
-  create_table "time_cards", force: :cascade do |t|
+  create_table "timecards", force: :cascade do |t|
     t.string   "username"
     t.datetime "occurrence"
     t.integer  "total_time"
