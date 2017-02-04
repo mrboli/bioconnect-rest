@@ -1,5 +1,5 @@
-module Api::V1
-  class TimecardsController < ApplicationController
+#module Api::V1
+  class Api::V1::TimecardsController < ApplicationController
     skip_before_filter :verify_authenticity_token
 
     def index
@@ -42,6 +42,7 @@ module Api::V1
 
     def destroy
       timecard = timecard_from_id
+
       if timecard && timecard.delete
         head :ok
       else
@@ -63,4 +64,4 @@ module Api::V1
       )
     end
   end
-end
+#end
