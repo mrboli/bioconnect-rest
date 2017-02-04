@@ -2,7 +2,6 @@ class Timecard < ApplicationRecord
   has_many :time_entries
 
   def update_total_time
-    p self
     if time_entries.count >= 2
       self.update_attributes(:total_time => get_total_time)
     elsif !self.total_time.nil?
