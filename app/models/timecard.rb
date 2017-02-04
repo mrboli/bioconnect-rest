@@ -2,7 +2,27 @@ class Timecard < ApplicationRecord
   has_many :time_entries
 
   def update_total_time
-    
+    p self
+    if time_entries.count >= 2
+      self.update_attributes(:total_time => get_total_time)
+    elsif !self.total_time.nil?
+      self.update_attributes(:total_time => nil)
+    end
+  end
+
+  def get_total_time
+    max_date = get_max_date(time_entries)
+    min_date = get_min_date(time_entries)
+    (max_date - min_date) * 1.days
+  end
+
+  # TODO: Put the column accessor [:time] into something configurable
+  def get_max_date(hash)
+    hash.max_by{|h| h[:time]}[:time]
+  end
+
+  def get_min_date(hash)
+    hash.min_by{|h| h[:time]}[:time]
   end
 
   class << self

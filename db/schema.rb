@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204014051) do
+ActiveRecord::Schema.define(version: 20170204185233) do
 
   create_table "time_entries", force: :cascade do |t|
     t.datetime "time"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170204014051) do
   create_table "timecards", force: :cascade do |t|
     t.string   "username"
     t.date     "occurrence"
-    t.integer  "total_time"
+    t.bigint   "total_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
