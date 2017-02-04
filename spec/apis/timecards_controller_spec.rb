@@ -2,11 +2,6 @@ require "spec_helper"
 
 RSpec.describe Api::V1::TimecardsController , :type => :controller do
   describe "#index" do
-    it "responds with 200" do
-      get :index
-      expect(response).to be_success
-    end
-
     context "when no timecards" do
       it "returns 200" do
         get :index
@@ -37,7 +32,7 @@ RSpec.describe Api::V1::TimecardsController , :type => :controller do
   end
 
   describe "#show" do
-    context "when an existing id is used" do
+    context "when an existant id is used" do
       let(:timecard) { FactoryGirl.create :timecard }
 
       it "returns 200 OK" do
@@ -58,7 +53,7 @@ RSpec.describe Api::V1::TimecardsController , :type => :controller do
     end
 
     # ASSUMPTION: in this new context block, there are no timecards
-    context "when a non existing id is used" do
+    context "when a non existant id is used" do
       it "returns 404 Not Found" do
         get :show, params: { id: 1 }
         expect(response).to have_http_status(:not_found)
@@ -155,6 +150,5 @@ RSpec.describe Api::V1::TimecardsController , :type => :controller do
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
-    
   end
 end  
