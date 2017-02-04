@@ -1,2 +1,0 @@
-class TimeCard < ApplicationRecord
-end

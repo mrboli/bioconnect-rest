@@ -3,14 +3,14 @@ module Api::V1
     skip_before_filter :verify_authenticity_token
 
     def index
-      render :json => Timecard.all
+      render json: Timecard.all
     end
 
     def show
-      @timecard = timecard_from_id
+      timecard = timecard_from_id
 
-      if @timecard
-        render :json => @timecard
+      if timecard
+        render json: timecard
       else
         head :not_found
       end
@@ -19,21 +19,21 @@ module Api::V1
     def create
       #TODO: validate first with .new and .save
       if timecard = Timecard.create(timecard_params)
-        render :json => timecard
+        render json: timecard
       else
         head :unprocessable_entity
       end
     end
 
     def update
-      @timecard = timecard_from_id
+      timecard = timecard_from_id
 
-      if @timecard && @timecard.update_attributes(timecard_params)
+      if timecard && timecard.update_attributes(timecard_params)
         # Could return an empty 200 instead
-        render :json => @timecard
+        render json: timecard
       else
-        if @timecard && @timecard.errors
-          render json: @timecard.errors, status: :unprocessable_entity
+        if timecard && timecard.errors
+          render json: timecard.errors, status: :unprocessable_entity
         else
           head :unprocessable_entity
         end
@@ -41,18 +41,20 @@ module Api::V1
     end
 
     def destroy
-      if timecard_from_id && timecard_from_id.delete
+      timecard = timecard_from_id
+      if timecard && timecard.delete
         head :ok
       else
         head :unprocessable_entity
       end
     end
 
+    private
+
     def timecard_from_id
+      # May also use .find_by_id, but this is clearer
       Timecard.find(params[:id]) if Timecard.exists? id: params[:id]
     end
-
-    private
 
     def timecard_params
       params.require(:timecard).permit(
