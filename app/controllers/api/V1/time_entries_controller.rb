@@ -40,6 +40,7 @@ module Api::V1
 
     def destroy
       time_entry = time_entry_from_id
+
       if time_entry && time_entry.delete
         head :ok
       else
