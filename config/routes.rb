@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
-  #get 'api', to: 'api#index'
-
-  #resources :timecards
-
   namespace :api do
     #TODO: List the api version in config and validate
     namespace :v1 do 
-      resources :timecards
-      resources :time_entries
+      resources :timecards, only: [:index, :show, :create, :update, :destroy]
+      resources :time_entries, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end
