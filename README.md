@@ -2,11 +2,10 @@
 
 `Ruby v2.4.0, Rails 5.0.1 (both latest stable)`
 
-
-##### This is a simplistic API that has two models which endpoints are structured off of:
+##### To run the project, just use `rails s`
 _API spec: https://gist.github.com/anaqvi15/3902991918e3e4b0b4dcc754c0bba74c_
 
-#### To run the project, just use `rails s`
+#### This is a simplistic API that has two models which endpoints are structured off of:
 
 * Timecards
 * TimeEntries
