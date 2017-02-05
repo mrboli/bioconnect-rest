@@ -18,7 +18,6 @@ _API spec: https://gist.github.com/anaqvi15/3902991918e3e4b0b4dcc754c0bba74c_
 ##### RSpec
 
 The frameworks chosen for this project were very simple. I personally have not worked in Rails for a while, and just wanted some basic, well used, well-supported community tools. RSpec has been the defacto unit testing framework in the past. It has a very nice spec-based syntax.
-
 The only downside that I'm personally aware of is that apparently that the original creator didn't create the framework to Ruby's style. There's a lot of unit testing frameworks out there, and if this was a production level app I would spend quite a bit of time doing research on what are the benefits and cons of different frameworks considering not only the project, but also community support.
 
 ##### Factory Girl
@@ -64,7 +63,7 @@ I chose to store the total time as seconds. You will most likely never need to p
 
 #### Timecard `update_total_time`
 
-This method is somewhat interesting.
+This method is somewhat interesting. It handles more than 2 time entries, and calculates based on max and min date times in the TimeEntry collection.
 
 It sets `total_time` on Timecards to nil if there is only one date (example from deleting a TimeEntry form a Timecard). Note, this will set the `total_time` to `0` if there are two TimeEntries, and one is updated to have a nil date. Invalid dates are not handled yet and this is a unhandled case.
 
