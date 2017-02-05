@@ -2,8 +2,11 @@
 
 `Ruby v2.4.0, Rails 5.0.1 (both latest stable)`
 
+
 ##### This is a simplistic API that has two models which endpoints are structured off of:
 _API spec: https://gist.github.com/anaqvi15/3902991918e3e4b0b4dcc754c0bba74c_
+
+#### To run the project, just use `rails s`
 
 * Timecards
 * TimeEntries
@@ -27,7 +30,7 @@ It's advisable to use Factories instead of fixtures. The choice for this framewo
 
 ##### API Controllers
 
-The application controller has been taken off of `ApplicationController::API` instead of `base` to simplify the authenticity issues of running the API. I'm making the assumption that we will only receive JSON, and that has much less chances of have vulnerabilities to attacks. This should technically be enforced though. If this API service was used amongst other rails functionalites in a web app, you would want to create a base `apis_controller`, have that inherit from the API base, then all api controllers inherit off of that.
+The application controller has been taken off of `ApplicationController::API` instead of `base` to simplify the authenticity issues of running the API. I'm making the assumption that we will only receive JSON, and that has much less chances of having vulnerabilities to attacks. This should technically be enforced though. If this API service was used amongst other rails functionalites in a web app, you would want to create a base `apis_controller`, have that inherit from the API base, then all api controllers inherit off of that.
 
 JSON was chosen as the dataformat of choice. It's pretty standard these days to use tons of javascript heavy frameworks. It's nicer to parse JSON insetad of XML or other formats in the frontend. On top of that, it has way less overhead.
 
