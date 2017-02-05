@@ -1,7 +1,5 @@
 class Api::V1::TimeEntriesController < ApplicationController
-  skip_before_filter :verify_authenticity_token
   after_action :update_timecard_total_time, only: [:create, :update, :destroy]
-  #after_action :update_timecard_total_time, only: [:create]
   
   def index
     render json: TimeEntry.all
@@ -52,11 +50,7 @@ class Api::V1::TimeEntriesController < ApplicationController
   private
 
   def update_timecard_total_time
-    # TODO: There's a breaking edge case here where a time entry doesn't
-    # necessarily have a timeard associated with it
-    p "*"*60
-    p "updating total time"
-    p @time_etnry
+    # TODO: Not a possible case right now, but a time entry without a timecard id will cause an exception
     @time_entry.timecard.update_total_time
   end
 

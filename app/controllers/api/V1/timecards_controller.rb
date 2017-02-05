@@ -1,5 +1,4 @@
 class Api::V1::TimecardsController < ApplicationController
-  skip_before_filter :verify_authenticity_token
 
   def index
     render json: Timecard.all
