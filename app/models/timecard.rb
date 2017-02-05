@@ -16,12 +16,16 @@ class Timecard < ApplicationRecord
   end
 
   # TODO: Put the column accessor [:time] into something configurable
-  def get_max_date(hash)
-    hash.max_by{|h| h[:time]}[:time]
+  def get_max_date(collection)
+    remove_nil_times(collection).max_by{|c| c[:time]}[:time]
   end
 
-  def get_min_date(hash)
-    hash.min_by{|h| h[:time]}[:time]
+  def get_min_date(collection)
+    remove_nil_times(collection).min_by{|c| c[:time]}[:time]
+  end
+
+  def remove_nil_times(collection)
+    collection.select{|c| c[:time].present?}
   end
 
   class << self
@@ -32,7 +36,7 @@ class Timecard < ApplicationRecord
         time_entry = timecard.time_entries.build(time_entry_params)
 
         if time_entry.save
-          update_total_time if timecard.time_entries.count >= 2
+          #update_total_time if timecard.time_entries.count >= 2
 
           return time_entry
           # TODO: return model with errors

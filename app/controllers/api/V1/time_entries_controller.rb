@@ -1,5 +1,7 @@
 class Api::V1::TimeEntriesController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  after_action :update_timecard_total_time, only: [:create, :update, :destroy]
+  #after_action :update_timecard_total_time, only: [:create]
   
   def index
     render json: TimeEntry.all
@@ -16,21 +18,21 @@ class Api::V1::TimeEntriesController < ApplicationController
   end
 
   def create
-    if time_entry = Timecard.create_time_entry(time_entry_params)
-      render json: time_entry
+    if @time_entry = Timecard.create_time_entry(time_entry_params)
+      render json: @time_entry
     else
       head :unprocessable_entity
     end
   end
 
   def update
-    time_entry = TimeEntry.find_by_id(params[:id])
+    @time_entry = TimeEntry.find_by_id(params[:id])
 
-    if time_entry && time_entry.update_attributes(time_entry_params)
-      render json: time_entry
+    if @time_entry && @time_entry.update_attributes(time_entry_params)
+      render json: @time_entry
     else
-      if time_entry && time_entry.errors
-        render json: time_entry.errors, status: :unprocessable_entity
+      if @time_entry && @time_entry.errors
+        render json: @time_entry.errors, status: :unprocessable_entity
       else
         head :unprocessable_entity
       end
@@ -38,9 +40,9 @@ class Api::V1::TimeEntriesController < ApplicationController
   end
 
   def destroy
-    time_entry = time_entry_from_id
+    @time_entry = time_entry_from_id
 
-    if time_entry && time_entry.delete
+    if @time_entry && @time_entry.delete
       head :ok
     else
       head :unprocessable_entity
@@ -48,6 +50,15 @@ class Api::V1::TimeEntriesController < ApplicationController
   end
 
   private
+
+  def update_timecard_total_time
+    # TODO: There's a breaking edge case here where a time entry doesn't
+    # necessarily have a timeard associated with it
+    p "*"*60
+    p "updating total time"
+    p @time_etnry
+    @time_entry.timecard.update_total_time
+  end
 
   def time_entry_from_id
     TimeEntry.find(params[:id]) if TimeEntry.exists? id: params[:id]
