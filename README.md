@@ -18,7 +18,10 @@ _API spec: https://gist.github.com/anaqvi15/3902991918e3e4b0b4dcc754c0bba74c_
 ##### RSpec
 
 The frameworks chosen for this project were very simple. I personally have not worked in Rails for a while, and just wanted some basic, well used, well-supported community tools. RSpec has been the defacto unit testing framework in the past. It has a very nice spec-based syntax.
-The only downside that I'm personally aware of is that apparently that the original creator didn't create the framework to Ruby's style. There's a lot of unit testing frameworks out there, and if this was a production level app I would spend quite a bit of time doing research on what are the benefits and cons of different frameworks considering not only the project, but also community support.
+The only downside that I'm personally aware of is that apparently the creator of rails doesn't like RSpec for it's complexity.
+http://www.rubyinside.com/dhh-offended-by-rspec-debate-4610.html
+
+There's a lot of unit testing frameworks out there, and if this was a production level app I would spend quite a bit of time doing research on what are the benefits and cons of different frameworks considering not only the project, but also community support.
 
 ##### Factory Girl
 
